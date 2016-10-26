@@ -107,7 +107,7 @@ double getWind(){
 
 double getBladeTipVelocity(double radius, double rpm){
     double pi = 3.14159265358979323846264338327950288419716939937510582;
-    double bladeTipVelocity = 2*radius*pi*rpm/60/100;
+    double bladeTipVelocity = 2*radius*pi*rpm/60;
     //cout << "Blade Tip Velocity: " << bladeTipVelocity << endl;
     return bladeTipVelocity;
 }
@@ -128,17 +128,20 @@ double calculateChord(double radianPoint){
 
     double chord = ((5.6*(radius*radius))/(bladeCount*coefficientLift*radianPoint*((bladeTipVelocity/windVelocity)*(bladeTipVelocity/windVelocity))));
 
-    cout << "Chord: " << chord << endl;
+    //cout << "Chord: " << chord << endl;
+    return chord;
 
 }
 
 void runCalculator(){
     double radius = getRadius();
+    ofstream exportFile("calculatedChords.txt");
     for (double i=0; i<=radius; i=i+(radius/256)){
 
-        cout << "I: " << i << endl;
-        calculateChord(i);
+        //cout << "I: " << i << endl;
+        exportFile << i << " " << calculateChord(i) <<endl;
+        //calculateChord(i);
     }
-
+    exportFile.close();
 
 }
