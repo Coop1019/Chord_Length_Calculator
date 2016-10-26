@@ -13,5 +13,6 @@
 double calculateChord();
 void createBlankFiles();
 double getRPM();
+void runCalculator();
 
 #endif //CHORD_LENGTH_CALCULATOR_CHORDCALC_H

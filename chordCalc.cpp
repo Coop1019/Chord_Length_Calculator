@@ -4,7 +4,7 @@
  *
  * Code Written by Cooper LeComp
  *
- * Last Updated 10/25/16
+ * Last Updated 10/26/16
  */
 
 #include <iostream>
@@ -64,12 +64,15 @@ double getRadius(){
     return radius;
 }
 int getBlades(){
-    int blades;
-    cout << "Blades: " << endl;
-    cin >> blades;
-    cout << endl;
-    if(blades){ return blades;}
-    else { return 0;}
+    int blades = 0;
+    ifstream bladeFile("blades.value");
+    if (bladeFile.is_open())
+    {
+        string line;
+        getline(bladeFile,line);
+        blades = stoi(line);
+    }
+    return blades;
 }
 double getCFLift(){
     double cfLift = 0;
@@ -105,11 +108,11 @@ double getWind(){
 double getBladeTipVelocity(double radius, double rpm){
     double pi = 3.14159265358979323846264338327950288419716939937510582;
     double bladeTipVelocity = 2*radius*pi*rpm/60/100;
-    cout << "Blade Tip Velocity: " << bladeTipVelocity << endl;
+    //cout << "Blade Tip Velocity: " << bladeTipVelocity << endl;
     return bladeTipVelocity;
 }
 
-double calculateChord(){
+double calculateChord(double radianPoint){
     //get Radius
     //Get Blades
     //Get Cl
@@ -119,12 +122,23 @@ double calculateChord(){
     double radius = getRadius();
     int bladeCount = getBlades();
     double coefficientLift = getCFLift();
-    double radianPoint = getRadianPoint();
+    //double radianPoint = getRadianPoint();
     double bladeTipVelocity = getBladeTipVelocity(radius, rpm);
     double windVelocity = getWind();
 
     double chord = ((5.6*(radius*radius))/(bladeCount*coefficientLift*radianPoint*((bladeTipVelocity/windVelocity)*(bladeTipVelocity/windVelocity))));
 
     cout << "Chord: " << chord << endl;
+
+}
+
+void runCalculator(){
+    double radius = getRadius();
+    for (double i=0; i<=radius; i=i+(radius/256)){
+
+        cout << "I: " << i << endl;
+        calculateChord(i);
+    }
+
 
 }
