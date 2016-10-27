@@ -124,6 +124,7 @@ double calculateChord(double radianPoint){
     double coefficientLift = getCFLift();
     //double radianPoint = getRadianPoint();
     double bladeTipVelocity = getBladeTipVelocity(radius, rpm);
+
     double windVelocity = getWind();
 
     double chord = ((5.6*(radius*radius))/(bladeCount*coefficientLift*radianPoint*((bladeTipVelocity/windVelocity)*(bladeTipVelocity/windVelocity))));
@@ -135,8 +136,12 @@ double calculateChord(double radianPoint){
 
 void runCalculator(){
     double radius = getRadius();
+    double rpm = getRPM();
+    cout << "Blade Tip Velocity: " << getBladeTipVelocity(radius,rpm) << endl;
+    cout << "Tip Speed Ratio: " << (getBladeTipVelocity(radius,rpm)/getWind()) << endl;
+
     ofstream exportFile("calculatedChords.txt");
-    for (double i=0; i<=radius; i=i+(radius/256)){
+    for (double i=0; i<=radius; i=i+(radius/50)){
 
         //cout << "I: " << i << endl;
         exportFile << i << " " << calculateChord(i) <<endl;
