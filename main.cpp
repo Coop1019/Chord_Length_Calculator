@@ -4,7 +4,7 @@
  *
  * Code Written by Cooper LeComp
  *
- * Last Updated 10/26/16
+ * Last Updated 10/27/16
  */
 #include <iostream>
 #include <cmath>
@@ -16,7 +16,7 @@ using namespace std;
 int main() {
     //int pizza;
     //createBlankFiles();
-    cout << "Raisbeck Aviation High School Wind Team Chord Length Calculator\n" << "Updated 10/26/16" << endl;
+    cout << "Raisbeck Aviation High School Wind Team Chord Length Calculator\n" << "Updated 10/27/16" << endl;
     //calculateChord();
 
     //getRPM();
